@@ -25,7 +25,7 @@ jobs:
       - uses: mstksg/setup-stack@v2
       - run: stack build
       - run: stack install --local-bin-path dist
-      - run: mv dist/homura-stopwatch dist/homura-stopwatch-${{ matrix.os }}
+      - run: cd dist && zip release-binary-${{ matrix.os }} *
       - uses: actions/upload-artifact@v1
         with:
           name: ${{ matrix.os }}
