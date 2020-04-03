@@ -12,6 +12,8 @@ jobs:
         with:
           path: ~/.stack
           key: ${{ runner.os }}-${{ hashFiles('**/stack.yaml.lock') }}-${{ hashFiles('**/package.yaml') }}-stack
+          restore-keys: |
+            ${{ runner.os }}-${{ hashFiles('**/stack.yaml.lock') }}-
       - uses: mstksg/setup-stack@v2
       - run: stack build
       - run: stack install --local-bin-path dist
