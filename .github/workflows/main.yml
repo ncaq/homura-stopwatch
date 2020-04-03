@@ -8,7 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - if: runner.os == 'Windows'
+      - if: runner.os == 'Windows' # 何故かWindowsだけキャッシュがダウンロードされないけれど諦めました
         uses: actions/cache@v1
         with:
           path: ~\AppData\Local\Programs\stack
