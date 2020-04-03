@@ -25,7 +25,8 @@ jobs:
       - uses: mstksg/setup-stack@v2
       - run: stack build
       - run: stack install --local-bin-path dist
-      - run: |
+      - if: runner.os != 'Windows'
+        run: |
           cd dist
           zip release-binary-${{ matrix.os }}.zip *
       - uses: actions/upload-artifact@v1
