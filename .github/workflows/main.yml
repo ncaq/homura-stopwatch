@@ -8,6 +8,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/.stack
+          key: ${{ runner.os }}-${{ hashFiles('**/stack.yaml.lock') }}-${{ hashFiles('**/package.yaml') }}-stack
       - uses: mstksg/setup-stack@v2
       - run: stack build
       - run: stack install --local-bin-path dist
