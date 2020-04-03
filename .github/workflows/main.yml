@@ -28,7 +28,7 @@ jobs:
       - if: runner.os != 'Windows'
         run: |
           cd dist
-          zip release-binary-${{ matrix.os }}.zip *
+          zip homura-stopwatch-release-binary-${{ matrix.os }}.zip *
       - uses: actions/upload-artifact@v1
         with:
           name: ${{ matrix.os }}
