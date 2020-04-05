@@ -23,8 +23,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-
       - uses: mstksg/setup-stack@v2
-      - run: stack install hlint
-      - run: hlint .
+      - if: runner.os == 'Linux'
+        run: |
+          stack install hlint
+          hlint .
       - run: stack build
       - run: stack install --local-bin-path dist
       - if: runner.os != 'Windows'
