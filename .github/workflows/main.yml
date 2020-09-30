@@ -8,20 +8,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - if: runner.os == 'Windows' # 何故かWindowsだけキャッシュがダウンロードされないことがある(不確定)
-        uses: actions/cache@v1
-        with:
-          path: ~\AppData\Local\Programs\stack
-          key: v1-${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-${{ hashFiles('**/package.yaml') }}
-          restore-keys: |
-            v1-${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-
-      - if: runner.os != 'Windows'
-        uses: actions/cache@v1
-        with:
-          path: ~/.stack
-          key: v1-${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-${{ hashFiles('**/package.yaml') }}
-          restore-keys: |
-            v1-${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-
       - uses: actions/setup-haskell@v1.1
         with:
           enable-stack: true
