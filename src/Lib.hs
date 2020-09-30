@@ -31,11 +31,11 @@ parseWork date str
               [hs, ss] -> do
                 h <- readMaybe hs
                 s <- readMaybe ss
-                pure $ DateTime date $ TimeOfDay{todHour = Hours h, todMin = Minutes s, todSec = 0, todNSec = 0}
+                pure $ DateTime date TimeOfDay{todHour = Hours h, todMin = Minutes s, todSec = 0, todNSec = 0}
               _ -> Nothing
             leftParse s =  Left $ "次の時刻表記が認識できませんでした: " <> s
         in case (parse startStr, parse endStr) of
-          (Just workStart, Just workEnd) -> Right $ Work{workName = concat tl, workTime = workEnd `timeDiff` workStart}
+          (Just workStart, Just workEnd) -> Right Work{workName = concat tl, workTime = workEnd `timeDiff` workStart}
           (Nothing, Just _) -> leftParse startStr
           (Just _, Nothing) -> leftParse endStr
           (Nothing, Nothing) -> leftParse $ startStr <> " && " <> endStr
