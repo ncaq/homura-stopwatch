@@ -57,5 +57,10 @@ workgroupPrettyStr works = unlines (workPrettyStr <$> works)
 workPrettyStr :: Work -> String
 workPrettyStr work
   = case fromSeconds (workTime work) of
-      (d, 0) -> workName work <> "\t" <> show (toInteger $ durationHours d) <> ":" <> show (toInteger $ durationMinutes d)
+      (d, 0) ->
+        concatMap (++ "\t")
+        [ workName work
+        , show (toInteger $ durationHours d) <> ":" <> show (toInteger $ durationMinutes d)
+        , show (fromIntegral (toInteger (durationHours d)) + (fromIntegral (toInteger (durationMinutes d)) / (60 :: Double)))
+        ]
       o -> error $ "出力がヘンになりました: " <> show o
