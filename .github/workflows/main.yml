@@ -12,20 +12,23 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~\AppData\Local\Programs\stack
-          key: ${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-${{ hashFiles('**/package.yaml') }}
+          key: v1-${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-${{ hashFiles('**/package.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-
+            v1-${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-
       - if: runner.os != 'Windows'
         uses: actions/cache@v1
         with:
           path: ~/.stack
-          key: ${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-${{ hashFiles('**/package.yaml') }}
+          key: v1-${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-${{ hashFiles('**/package.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-
-      - uses: mstksg/setup-stack@v2
+            v1-${{ runner.os }}-stack-${{ hashFiles('**/stack.yaml.lock') }}-
+      - uses: actions/setup-haskell@v1.1
+        with:
+          enable-stack: true
       - if: runner.os == 'Linux'
+        name: "hlint"
         run: |
-          stack install hlint
+          sudo apt-get install hlint
           hlint .
       - run: stack build
       - run: stack install --local-bin-path dist
