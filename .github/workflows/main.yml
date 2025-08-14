@@ -25,7 +25,7 @@ jobs:
           cd dist
           zip homura-stopwatch-release-binary-${{ matrix.os }}.zip *
           rm homura-stopwatch
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}
           path: dist
