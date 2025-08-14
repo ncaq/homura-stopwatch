@@ -1,5 +1,5 @@
 name: homura-stopwatch
-version: 0.2.0.0
+version: 0.2.0.1
 github: "ncaq/homura-stopwatch"
 license: MIT
 author: "ncaq"
@@ -45,7 +45,7 @@ _exec-ghc-options: &exec-ghc-options
 
 dependencies:
   - base >= 4.7 && < 5
-  - hourglass
+  - time-hourglass
   - split
 
 library:

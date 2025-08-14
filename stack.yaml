@@ -1,1 +1,4 @@
-resolver: lts-15.3
+snapshot: lts-24.2 # GHC 9.10.2
+
+extra-deps:
+- time-hourglass-0.3.0@sha256:ee02356fe24919ec43ae17fc0007398c2fd0bbe822833b2d7a9c849537b90580,3114
